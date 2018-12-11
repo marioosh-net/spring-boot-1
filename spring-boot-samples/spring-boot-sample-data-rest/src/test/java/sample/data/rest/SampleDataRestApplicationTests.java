@@ -25,10 +25,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import sample.data.rest.domain.City;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,6 +78,12 @@ public class SampleDataRestApplicationTests {
 				"/api/cities/search/findByNameContainingAndCountryContainingAllIgnoringCase?name=&country=UK"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("_embedded.cities", hasSize(3)));
+	}
+
+	@Test
+	public void validation() throws Exception {
+		this.mvc.perform(post("/api/test", new City("London", "UK")))
+				.andExpect(status().isOk());
 	}
 
 }
