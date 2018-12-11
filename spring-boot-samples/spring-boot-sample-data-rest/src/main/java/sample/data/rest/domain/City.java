@@ -24,7 +24,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import sample.data.rest.validation.CheckValid;
+
 @Entity
+@CheckValid
 public class City implements Serializable {
 
 	private static final long serialVersionUID = 1L;
